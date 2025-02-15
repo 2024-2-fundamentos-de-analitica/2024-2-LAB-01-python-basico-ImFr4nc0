@@ -26,3 +26,37 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    ruta_archivo = 'files/input/data.csv'
+
+    with open(ruta_archivo, 'r') as file:
+
+        lines = file.readlines()
+
+        valores_por_clave = {}
+
+        for line in lines:
+
+            columns = line.strip().split('\t')
+
+            columna_5 = columns[4]
+
+            pares_clave_valor = columna_5.split(',')
+
+            for par in pares_clave_valor:
+
+                clave, valor = par.split(':')
+                valor = int(valor)
+
+                if clave in valores_por_clave:
+                    min_actual, max_actual = valores_por_clave[clave]
+                    if valor < min_actual:
+                        min_actual = valor
+                    if valor > max_actual:
+                        max_actual = valor
+                    valores_por_clave[clave] = (min_actual, max_actual)
+                else:
+                    valores_por_clave[clave] = (valor, valor)
+
+    lista_tuplas = sorted([(clave, min_val, max_val) for clave, (min_val, max_val) in valores_por_clave.items()], key=lambda x: x[0])
+
+    return lista_tuplas

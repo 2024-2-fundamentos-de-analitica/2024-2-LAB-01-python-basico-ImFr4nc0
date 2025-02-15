@@ -24,3 +24,24 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    ruta_archivo = 'files/input/data.csv'
+    with open(ruta_archivo, 'r') as file:
+
+        lines = file.readlines()
+        conteo_claves = {}
+
+        for line in lines:
+            columns = line.strip().split('\t')
+            columna_5 = columns[4]
+            pares_clave_valor = columna_5.split(',')
+
+            for par in pares_clave_valor:
+                clave = par.split(':')[0]
+                if clave in conteo_claves:
+                    conteo_claves[clave] += 1
+                else:
+                    conteo_claves[clave] = 1
+
+        conteo_claves_ordenado = {k: conteo_claves[k] for k in sorted(conteo_claves)}
+
+        return conteo_claves_ordenado

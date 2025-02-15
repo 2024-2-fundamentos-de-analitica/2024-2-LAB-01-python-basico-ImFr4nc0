@@ -14,3 +14,19 @@ def pregunta_01():
     214
 
     """
+    with open('files/input/data.csv', 'r') as file:
+        lines = file.readlines()
+        
+        suma_segunda_columna = 0
+
+        for line in lines:
+            columns = line.strip().split('\t') 
+            
+            try:
+                valor = int(columns[1]) 
+                suma_segunda_columna += valor
+            except (ValueError, IndexError):
+
+                continue
+    
+    return suma_segunda_columna

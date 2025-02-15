@@ -20,3 +20,19 @@ def pregunta_10():
 
 
     """
+    ruta_archivo = 'files/input/data.csv'
+    with open(ruta_archivo, 'r') as file:
+        
+        lines = file.readlines()
+        resultado = []
+        
+        for line in lines:
+            columns = line.strip().split('\t')
+            letra = columns[0]
+            columna_4 = columns[3].split(',')
+            columna_5 = columns[4].split(',')
+            cantidad_columna_4 = len(columna_4)
+            cantidad_columna_5 = len(columna_5)
+            resultado.append((letra, cantidad_columna_4, cantidad_columna_5))
+            
+        return resultado

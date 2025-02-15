@@ -26,3 +26,27 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    ruta_archivo = 'files/input/data.csv'
+
+    with open(ruta_archivo, 'r') as file:
+
+        lines = file.readlines()
+
+        conteo_por_mes = {}
+
+        for line in lines:
+
+            columns = line.strip().split('\t')
+
+            fecha = columns[2]
+
+            mes = fecha.split('-')[1]
+
+            if mes in conteo_por_mes:
+                conteo_por_mes[mes] += 1
+            else:
+                conteo_por_mes[mes] = 1
+
+    lista_tuplas = sorted(conteo_por_mes.items(), key=lambda x: x[0])
+
+    return lista_tuplas

@@ -25,3 +25,27 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    ruta_archivo = 'files/input/data.csv'
+
+    with open(ruta_archivo, 'r') as file:
+
+        lines = file.readlines()
+
+        asociaciones = {}
+
+        for line in lines:
+
+            columns = line.strip().split('\t')
+
+            valor_columna_2 = int(columns[1])
+
+            letra_columna_1 = columns[0]
+
+            if valor_columna_2 in asociaciones:
+                asociaciones[valor_columna_2].append(letra_columna_1)
+            else:
+                asociaciones[valor_columna_2] = [letra_columna_1]
+
+    lista_tuplas = sorted([(valor, letras) for valor, letras in asociaciones.items()], key=lambda x: x[0])
+
+    return lista_tuplas
